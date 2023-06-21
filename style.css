@@ -1,0 +1,50 @@
+table {
+    border-collapse: collapse;
+    width: 30%;
+    height: 25%;
+    table-layout: fixed
+}
+
+td {
+    padding: 10px;
+}
+
+button {
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    border: none;
+    background-color: #62626473;
+    color: #000;
+    text-align: center;
+    border-radius: 40px;
+    padding: 10px;
+}
+
+.buttonAction {
+    background-color: #bdbdbd92;
+}
+
+.buttonOperator {
+    background-color: #e1791d;
+    color: #ffffff;
+}
+
+body {
+    background-color: black;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.result {
+    background-color: #ffffffa4;
+    padding: 20px;
+    width: 20px;
+    height: 15px;
+    border-radius: 40px;
+}
