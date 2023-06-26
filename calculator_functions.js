@@ -1,3 +1,4 @@
+let arrOfNumAnsOper = [];
 
 const clearButton = document.getElementById('clearButton');
 const negateButton = document.getElementById('negateButton');
@@ -128,7 +129,6 @@ function updateResult(result) {
     const resultElement = document.querySelector('.result');
     resultElement.textContent = result;
 };
-
 
 
 
