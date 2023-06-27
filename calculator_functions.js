@@ -1,6 +1,7 @@
 let arrOfNumAnsOper = [];
+// for in
 
-const clearButton = document.getElementById('clearButton');
+const clearButton = document.getElementById('clearButton');//.getel
 const negateButton = document.getElementById('negateButton');
 const percentageButton = document.getElementById('percentageButton');
 const divideButton = document.getElementById('divideButton');
@@ -47,7 +48,9 @@ addButton.addEventListener('click', handleOperatorClick);
 
 zeroButton.addEventListener('click', handleNumberClick);
 decimalButton.addEventListener('click', handleNumberClick);
-equalsButton.addEventListener('click', handleNumberClick);
+equalsButton.addEventListener('click', handleEqualClick);
+// ==?
+
 
 function handleClear() {
     arrOfNumAnsOper = [];
@@ -84,9 +87,20 @@ function handleOperator() {
 
 function handleNumberClick(event) {
     const number = event.target.textContent;
-    arrOfNumAnsOper.push(Number(number));
-    updateResult(number);
+    //
+    if (typeof arrOfNumAnsOper[arrOfNumAnsOper.length - 1] === 'number') {
+        const lastNumber = arrOfNumAnsOper[arrOfNumAnsOper.length - 1];
+        const newNumber = Number(`${lastNumber}${number}`);
+        arrOfNumAnsOper[arrOfNumAnsOper.length - 1] = newNumber;
+        updateResult(newNumber);
+    } else {
+        arrOfNumAnsOper.push(Number(number));
+        updateResult(number);
+    }
+    //
 };
+
+
 
 function handleOperatorClick(event) {
     if (arrOfNumAnsOper.length >= 3) {
@@ -96,7 +110,7 @@ function handleOperatorClick(event) {
     const operator = event.target.textContent;
     arrOfNumAnsOper.push(operator);
 };
-
+//pogledni
 function performOperation() {
     const operand1 = arrOfNumAnsOper[0];
     const operator = arrOfNumAnsOper[1];
@@ -130,7 +144,8 @@ function updateResult(result) {
     resultElement.textContent = result;
 };
 
+function handleEqualClick() {
+    performOperation();
+};
 
-
-
-
+console.log(arrOfNumAnsOper);
