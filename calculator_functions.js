@@ -1,7 +1,7 @@
 let arrOfNumAnsOper = [];
 // for in
 
-const clearButton = document.getElementById('clearButton');//.getel
+const clearButton = document.getElementById.addEventListener('click', handleClear);//.getel
 const negateButton = document.getElementById('negateButton');
 const percentageButton = document.getElementById('percentageButton');
 const divideButton = document.getElementById('divideButton');
@@ -26,7 +26,6 @@ const decimalButton = document.getElementById('decimalButton');
 const equalsButton = document.getElementById('equalsButton');
 
 
-clearButton.addEventListener('click', handleClear);
 negateButton.addEventListener('click', handleNegate);
 percentageButton.addEventListener('click', handlePercentage);
 divideButton.addEventListener('click', handleOperator);
