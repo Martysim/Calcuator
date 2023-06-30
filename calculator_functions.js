@@ -1,55 +1,29 @@
 let arrOfNumAnsOper = [];
-// for in
 
-const clearButton = document.getElementById('clearButton');//.getel
-const negateButton = document.getElementById('negateButton');
-const percentageButton = document.getElementById('percentageButton');
-const divideButton = document.getElementById('divideButton');
+document.getElementById('clearButton').addEventListener('click', handleClear);
+document.getElementById('negateButton').addEventListener('click', handleNegate);
+document.getElementById('percentageButton').addEventListener('click', handlePercentage);
+document.getElementById('divideButton').addEventListener('click', handleOperator);
 
-const sevenButton = document.getElementById('sevenButton');
-const eightButton = document.getElementById('eightButton');
-const nineButton = document.getElementById('nineButton');
-const multiplyButton = document.getElementById('multiplyButton');
+document.getElementById('sevenButton').addEventListener('click', handleNumberClick);
+document.getElementById('eightButton').addEventListener('click', handleNumberClick);
+document.getElementById('nineButton').addEventListener('click', handleNumberClick);
+document.getElementById('multiplyButton').addEventListener('click', handleOperatorClick);
 
-const fourButton = document.getElementById('fourButton');
-const fiveButton = document.getElementById('fiveButton');
-const sixButton = document.getElementById('sixButton');
-const subtractButton = document.getElementById('subtractButton');
+document.getElementById('fourButton').addEventListener('click', handleNumberClick);
+document.getElementById('fiveButton').addEventListener('click', handleNumberClick);
+document.getElementById('sixButton').addEventListener('click', handleNumberClick);
+document.getElementById('subtractButton').addEventListener('click', handleOperatorClick);
 
-const oneButton = document.getElementById('oneButton');
-const twoButton = document.getElementById('twoButton');
-const threeButton = document.getElementById('threeButton');
-const addButton = document.getElementById('addButton');
+document.getElementById('oneButton').addEventListener('click', handleNumberClick);
+document.getElementById('twoButton').addEventListener('click', handleNumberClick);
+document.getElementById('threeButton').addEventListener('click', handleNumberClick);
+document.getElementById('addButton').addEventListener('click', handleOperatorClick);
 
-const zeroButton = document.getElementById('zeroButton');
-const decimalButton = document.getElementById('decimalButton');
-const equalsButton = document.getElementById('equalsButton');
+document.getElementById('zeroButton').addEventListener('click', handleNumberClick);
+document.getElementById('decimalButton').addEventListener('click', decimal);
+document.getElementById('equalsButton').addEventListener('click', performOperation);
 
-
-clearButton.addEventListener('click', handleClear);
-negateButton.addEventListener('click', handleNegate);
-percentageButton.addEventListener('click', handlePercentage);
-divideButton.addEventListener('click', handleOperator);
-
-sevenButton.addEventListener('click', handleNumberClick);
-eightButton.addEventListener('click', handleNumberClick);
-nineButton.addEventListener('click', handleNumberClick);
-multiplyButton.addEventListener('click', handleOperatorClick);
-
-fourButton.addEventListener('click', handleNumberClick);
-fiveButton.addEventListener('click', handleNumberClick);
-sixButton.addEventListener('click', handleNumberClick);
-subtractButton.addEventListener('click', handleOperatorClick);
-
-oneButton.addEventListener('click', handleNumberClick);
-twoButton.addEventListener('click', handleNumberClick);
-threeButton.addEventListener('click', handleNumberClick);
-addButton.addEventListener('click', handleOperatorClick);
-
-zeroButton.addEventListener('click', handleNumberClick);
-decimalButton.addEventListener('click', handleNumberClick);
-equalsButton.addEventListener('click', handleEqualClick);
-// ==?
 
 
 function handleClear() {
@@ -74,7 +48,7 @@ function handlePercentage() {
     };
 };
 
-function handleOperator() {
+function handleOperator(event) {
     if (arrOfNumAnsOper.length >= 3) {
         performOperation();
     };
@@ -85,22 +59,29 @@ function handleOperator() {
     };
 };
 
+
+
+
 function handleNumberClick(event) {
+
     const number = event.target.textContent;
-    //
-    if (typeof arrOfNumAnsOper[arrOfNumAnsOper.length - 1] === 'number') {
+    let lastElement = arrOfNumAnsOper[arrOfNumAnsOper.length - 1];
+    if ((typeof lastElement === 'number') || (lastElement && lastElement.includes('.'))) {
         const lastNumber = arrOfNumAnsOper[arrOfNumAnsOper.length - 1];
-        const newNumber = Number(`${lastNumber}${number}`);
+        const newNumber = parseFloat(`${lastNumber}${number}`);
         arrOfNumAnsOper[arrOfNumAnsOper.length - 1] = newNumber;
         updateResult(newNumber);
     } else {
         arrOfNumAnsOper.push(Number(number));
         updateResult(number);
-    }
-    //
+    };
+
 };
 
 
+//  0, 1, 2
+// [3, 2, 5]
+// 325, + , 12
 
 function handleOperatorClick(event) {
     if (arrOfNumAnsOper.length >= 3) {
@@ -108,9 +89,11 @@ function handleOperatorClick(event) {
     };
 
     const operator = event.target.textContent;
-    arrOfNumAnsOper.push(operator);
+    // arrOfNumAnsOper.push(operator);
+    arrOfNumAnsOper[1] = operator;
+    console.log(arrOfNumAnsOper);
 };
-//pogledni
+
 function performOperation() {
     const operand1 = arrOfNumAnsOper[0];
     const operator = arrOfNumAnsOper[1];
@@ -124,10 +107,10 @@ function performOperation() {
         case '-':
             result = operand1 - operand2;
             break;
-        case '*':
+        case '×':
             result = operand1 * operand2;
             break;
-        case '/':
+        case '÷':
             result = operand1 / operand2;
             break;
         default:
@@ -142,10 +125,25 @@ function performOperation() {
 function updateResult(result) {
     const resultElement = document.querySelector('.result');
     resultElement.textContent = result;
+    console.log(arrOfNumAnsOper);
+
 };
 
-function handleEqualClick() {
-    performOperation();
+
+function decimal() {
+    let lastItem = arrOfNumAnsOper[arrOfNumAnsOper.length - 1];
+
+    if (typeof lastItem === 'number' && !Number.isInteger(lastItem)) {
+        // Вече имаме десетична част, не правим нищо
+        return;
+    };
+
+    // Добавяме десетична част към текущото число
+    arrOfNumAnsOper[arrOfNumAnsOper.length - 1] = `${lastItem}.`;
+    updateResult(`${lastItem}.`);
 };
 
-console.log(arrOfNumAnsOper);
+// ++ +- готово
+// +  - готово
+// .. проверка
+// направи проверки за невалидни входове 
