@@ -25,7 +25,6 @@ document.getElementById('decimalButton').addEventListener('click', decimal);
 document.getElementById('equalsButton').addEventListener('click', performOperation);
 
 
-
 function handleClear() {
     arrOfNumAnsOper = [];
     updateResult('');
@@ -34,8 +33,7 @@ function handleClear() {
 function handleNegate() {
     if (arrOfNumAnsOper.length > 0) {
         const currentNumber = arrOfNumAnsOper[arrOfNumAnsOper.length - 1];
-        arrOfNumAnsOper[arrOfNumAnsOper.length - 1] = -currentNumber;
-        updateResult(arrOfNumAnsOper[arrOfNumAnsOper.length - 1]);
+        updateResult(-currentNumber);
     };
 };
 
@@ -59,15 +57,12 @@ function handleOperator(event) {
     };
 };
 
-
-
-
 function handleNumberClick(event) {
 
     const number = event.target.textContent;
     let lastElement = arrOfNumAnsOper[arrOfNumAnsOper.length - 1];
     if ((typeof lastElement === 'number') || (lastElement && lastElement.includes('.'))) {
-        const lastNumber = arrOfNumAnsOper[arrOfNumAnsOper.length - 1];
+        const lastNumber = lastElement;
         const newNumber = parseFloat(`${lastNumber}${number}`);
         arrOfNumAnsOper[arrOfNumAnsOper.length - 1] = newNumber;
         updateResult(newNumber);
@@ -75,13 +70,7 @@ function handleNumberClick(event) {
         arrOfNumAnsOper.push(Number(number));
         updateResult(number);
     };
-
 };
-
-
-//  0, 1, 2
-// [3, 2, 5]
-// 325, + , 12
 
 function handleOperatorClick(event) {
     if (arrOfNumAnsOper.length >= 3) {
@@ -89,7 +78,6 @@ function handleOperatorClick(event) {
     };
 
     const operator = event.target.textContent;
-    // arrOfNumAnsOper.push(operator);
     arrOfNumAnsOper[1] = operator;
     console.log(arrOfNumAnsOper);
 };
@@ -129,21 +117,13 @@ function updateResult(result) {
 
 };
 
-
 function decimal() {
     let lastItem = arrOfNumAnsOper[arrOfNumAnsOper.length - 1];
 
     if (typeof lastItem === 'number' && !Number.isInteger(lastItem)) {
-        // Вече имаме десетична част, не правим нищо
         return;
     };
 
-    // Добавяме десетична част към текущото число
     arrOfNumAnsOper[arrOfNumAnsOper.length - 1] = `${lastItem}.`;
     updateResult(`${lastItem}.`);
 };
-
-// ++ +- готово
-// +  - готово
-// .. проверка
-// направи проверки за невалидни входове 
