@@ -1,4 +1,10 @@
-let arrOfNumAnsOper = [];
+let arrOfNumAnsOper = [0];
+const OPERATORS = {
+    PLUS: "+",
+    MINUS: "-",
+    DOUBLE: "×",
+    DIVISION: "÷"
+};
 
 document.getElementById('clearButton').addEventListener('click', handleClear);
 document.getElementById('negateButton').addEventListener('click', handleNegate);
@@ -26,8 +32,8 @@ document.getElementById('equalsButton').addEventListener('click', performOperati
 
 
 function handleClear() {
-    arrOfNumAnsOper = [];
-    updateResult('');
+    arrOfNumAnsOper = [0];
+    updateResult('0');
 };
 
 function handleNegate() {
@@ -41,8 +47,23 @@ function handlePercentage() {
     if (arrOfNumAnsOper.length > 0) {
         const currentNumber = arrOfNumAnsOper[arrOfNumAnsOper.length - 1];
         const percentage = currentNumber / 100;
-        arrOfNumAnsOper[arrOfNumAnsOper.length - 1] = percentage;
-        updateResult(percentage);
+
+        let result;
+        const operator = arrOfNumAnsOper[1];
+        if (operator === OPERATORS.PLUS) {
+            arrOfNumAnsOper[0] += (arrOfNumAnsOper[0] * percentage);
+        } else if (operator === OPERATORS.MINUS) {
+            arrOfNumAnsOper[0] -= (arrOfNumAnsOper[0] * percentage);
+        } else if (operator === OPERATORS.DOUBLE) {
+            arrOfNumAnsOper[0] *= (arrOfNumAnsOper[0] * percentage);
+        } else if (operator === OPERATORS.DIVISION) {
+            arrOfNumAnsOper[0] /= (arrOfNumAnsOper[0] * percentage);
+        } else {
+            arrOfNumAnsOper[arrOfNumAnsOper.length - 1] = percentage;
+        };
+        result = arrOfNumAnsOper[0];
+        arrOfNumAnsOper = [result]
+        updateResult(arrOfNumAnsOper);
     };
 };
 
@@ -89,16 +110,16 @@ function performOperation() {
     let result;
 
     switch (operator) {
-        case '+':
+        case OPERATORS.PLUS:
             result = operand1 + operand2;
             break;
-        case '-':
+        case OPERATORS.MINUS:
             result = operand1 - operand2;
             break;
-        case '×':
+        case OPERATORS.DOUBLE:
             result = operand1 * operand2;
             break;
-        case '÷':
+        case OPERATORS.DIVISION:
             result = operand1 / operand2;
             break;
         default:
@@ -106,6 +127,7 @@ function performOperation() {
             break;
     };
 
+    result = parseFloat(result.toFixed(2));
     arrOfNumAnsOper = [result];
     updateResult(result);
 };
@@ -122,6 +144,16 @@ function decimal() {
 
     if (typeof lastItem === 'number' && !Number.isInteger(lastItem)) {
         return;
+    };
+
+    if (lastItem === OPERATORS.PLUS ||
+        lastItem === OPERATORS.MINUS ||
+        lastItem === OPERATORS.DOUBLE ||
+        lastItem === OPERATORS.DIVISION) {
+
+        arrOfNumAnsOper[2] = "0";
+        lastItem = 0;
+
     };
 
     arrOfNumAnsOper[arrOfNumAnsOper.length - 1] = `${lastItem}.`;
