@@ -50,16 +50,21 @@ function handlePercentage() {
 
         let result;
         const operator = arrOfNumAnsOper[1];
-        if (operator === OPERATORS.PLUS) {
-            arrOfNumAnsOper[0] += (arrOfNumAnsOper[0] * percentage);
-        } else if (operator === OPERATORS.MINUS) {
-            arrOfNumAnsOper[0] -= (arrOfNumAnsOper[0] * percentage);
-        } else if (operator === OPERATORS.DOUBLE) {
-            arrOfNumAnsOper[0] *= (arrOfNumAnsOper[0] * percentage);
-        } else if (operator === OPERATORS.DIVISION) {
-            arrOfNumAnsOper[0] /= (arrOfNumAnsOper[0] * percentage);
-        } else {
-            arrOfNumAnsOper[arrOfNumAnsOper.length - 1] = percentage;
+        switch (operator) {
+            case OPERATORS.PLUS:
+                arrOfNumAnsOper[0] += (arrOfNumAnsOper[0] * percentage);
+                break;
+            case OPERATORS.MINUS:
+                arrOfNumAnsOper[0] -= (arrOfNumAnsOper[0] * percentage);
+                break;
+            case OPERATORS.DOUBLE:
+                arrOfNumAnsOper[0] *= (arrOfNumAnsOper[0] * percentage);
+                braak;
+            case OPERATORS.DIVISION:
+                arrOfNumAnsOper[0] /= (arrOfNumAnsOper[0] * percentage);
+                break;
+            default:
+                arrOfNumAnsOper[arrOfNumAnsOper.length - 1] = percentage
         };
         result = arrOfNumAnsOper[0];
         arrOfNumAnsOper = [result]
