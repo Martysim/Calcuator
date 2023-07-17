@@ -6,27 +6,18 @@ const OPERATORS = {
     DIVISION: "÷"
 };
 
+
+const buttons = document.querySelectorAll(".buttonNumber");
+buttons.forEach((button) => {
+    button.addEventListener('click', handleNumberClick);
+});
+const operatorsClick = document.querySelectorAll(".buttonOperator");
+operatorsClick.forEach((button) => {
+    button.addEventListener('click', handleOperatorClick);
+});
 document.getElementById('clearButton').addEventListener('click', handleClear);
 document.getElementById('negateButton').addEventListener('click', handleNegate);
 document.getElementById('percentageButton').addEventListener('click', handlePercentage);
-document.getElementById('divideButton').addEventListener('click', handleOperator);
-
-document.getElementById('sevenButton').addEventListener('click', handleNumberClick);
-document.getElementById('eightButton').addEventListener('click', handleNumberClick);
-document.getElementById('nineButton').addEventListener('click', handleNumberClick);
-document.getElementById('multiplyButton').addEventListener('click', handleOperatorClick);
-
-document.getElementById('fourButton').addEventListener('click', handleNumberClick);
-document.getElementById('fiveButton').addEventListener('click', handleNumberClick);
-document.getElementById('sixButton').addEventListener('click', handleNumberClick);
-document.getElementById('subtractButton').addEventListener('click', handleOperatorClick);
-
-document.getElementById('oneButton').addEventListener('click', handleNumberClick);
-document.getElementById('twoButton').addEventListener('click', handleNumberClick);
-document.getElementById('threeButton').addEventListener('click', handleNumberClick);
-document.getElementById('addButton').addEventListener('click', handleOperatorClick);
-
-document.getElementById('zeroButton').addEventListener('click', handleNumberClick);
 document.getElementById('decimalButton').addEventListener('click', decimal);
 document.getElementById('equalsButton').addEventListener('click', performOperation);
 
